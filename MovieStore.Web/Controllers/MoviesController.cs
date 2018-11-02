@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieStore.Business;
 using MovieStore.DB.Models;
+using MovieStore.Web.ViewModels;
 
 namespace MovieStore.Web.Controllers
 {
@@ -129,7 +130,7 @@ namespace MovieStore.Web.Controllers
             }
             base.Dispose(disposing);
         }
-        // GET: Movies/Delete/5
+        // GET: Movies/Cart/5
         public ActionResult Cart(int? id)
         {
             if (id == null)
@@ -141,17 +142,25 @@ namespace MovieStore.Web.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Tax = moviesTable.Price * 0.08;  //Replace with call to .Business project
+            ////ViewBag.Tax = moviesTable.Price * 0.08;  //Replace with call to .Business project
 
+            //TaxCalculate cl = new TaxCalculate();
+            //ViewBag.Tax = cl.GetTaxCalc(movies.Price);
+            //ViewBag.TotalPrice = cl.TotPrice(movies.Price);
+
+            //return View("~/Views/Movies/Cart.cshtml", movies);  OR
+            MovieVm vm = new MovieVm();
+            vm.ID = movies.ID;
+            vm.Title = movies.Title;
+            vm.Year = movies.Year;
+            vm.Price = movies.Price;
             TaxCalculate cl = new TaxCalculate();
-            ViewBag.Tax = cl.GetTaxCalc(movies.Price);
-            ViewBag.TotalPrice = cl.TotPrice(movies.Price);
-
-            return View("~/Views/Movies/Cart.cshtml", movies);
-            
+            vm.Tax = cl.GetTaxCalc(movies.Price);
+            vm.Total = cl.TotPrice(movies.Price);
+            return View(vm);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Movies/Cart/5
         [HttpPost, ActionName("Cart")]
         [ValidateAntiForgeryToken]
         public ActionResult Cart(int id)

@@ -123,6 +123,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MovieVm.cs" />
+    <Compile Include="ViewModels\OrdPlace.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

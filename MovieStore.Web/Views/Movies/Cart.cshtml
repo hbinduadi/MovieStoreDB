@@ -1,4 +1,4 @@
-﻿@model MovieStore.DB.Models.Movies
+﻿@model MovieStore.Web.ViewModels.MovieVm
 @*@model MovieStore.Web.Models.MoviesTable*@
 @{
     ViewBag.Title = "Check Out";
@@ -33,17 +33,25 @@
         </dt>
 
         <dd>
-            @ViewBag.Tax
+            @*@ViewBag.Tax*@
+            @Html.DisplayFor(model => model.Tax)
         </dd>
         <dt>
             @Html.DisplayName("Total Price")
         </dt>
 
         <dd>
-            @ViewBag.TotalPrice
+            @*@ViewBag.TotalPrice*@
+            @Html.DisplayFor(model => model.Total)
         </dd>
     </dl>
-    
+
+    <div>
+        <input type="button" value="Cancel" onclick="location.href='@Url.Action("Index", "Movies")'" class="btn btn-default" />
+        <br />
+        @*@Html.ActionLink("Buy","Cart",new { id = Model.ID }))  Another way *@
+    </div>
+
 </div>
 
 <p>
